@@ -310,6 +310,7 @@ void CSimDlg::OnBnClickedStop()
 {
 	context->stop();
 	dContext->stopRedrawingThread();
+	dContext->makeCurrent();
 
 	stopButton->EnableWindow(FALSE);
 	startButton->EnableWindow(TRUE);

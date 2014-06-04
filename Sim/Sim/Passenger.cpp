@@ -11,8 +11,8 @@ void Passenger::wakeup()
 	timeCollisionAgent = 15;
 	timeCollisionObst = 15;
 	radius = 7;
-	personalSpace = 10;
-	maxSpeed = 10;
+	personalSpace = 2;
+	maxSpeed = 3;
 	isAchievedGoal = true;
 
 	timeStep = 0.15f;
