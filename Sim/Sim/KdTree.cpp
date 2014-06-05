@@ -157,12 +157,13 @@ void KdObstacleTree::computeObstacleNeighborsRecursive(const Agent *agent, float
 		ObstacleVertex* vert1 = node->getObstacleVertex();
 		ObstacleVertex* vert2 = vert1->getNextObstVertex();
 
-		float signAgnetDistToLine = 0;
-		bool isAgentLeftOfEdge = isLeftOf(vert1->getPoint(), vert2->getPoint(), agent->getPosition(), signAgnetDistToLine);
+		float signAgentDistToLine = 0;
+		bool isAgentLeftOfEdge = isLeftOf(vert1->getPoint(), vert2->getPoint(), agent->getPosition(), signAgentDistToLine);
 
 		computeObstacleNeighborsRecursive(agent, maxDistSq, (isAgentLeftOfEdge ? node->getLeftNode() : node->getRightNode()), neighborsObstVerts);
 
-		const float distSqLine = sqr(signAgnetDistToLine) / absSq(vert2->getPoint() - vert1->getPoint());
+		const float distSqLine = std::min(absSq(agent->getPosition() - vert1->getPoint()),
+			absSq(agent->getPosition() - vert2->getPoint()));
 
 		if (distSqLine < maxDistSq) 
 		{

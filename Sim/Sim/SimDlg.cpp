@@ -125,6 +125,8 @@ HCURSOR CSimDlg::OnQueryDragIcon()
 
 void CSimDlg::OnBnClickedBoarding()
 {
+	dContext->makeCurrent();
+
 	stopButton->EnableWindow(FALSE);
 	startButton->EnableWindow(TRUE);
 
@@ -142,7 +144,7 @@ void CSimDlg::OnBnClickedBoarding()
 
 	passengers.erase(passengers.begin(), passengers.end());
 
-	for (int i = 0; i < 25; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		Passenger* agent = new Passenger(env);
 		
@@ -164,6 +166,8 @@ void CSimDlg::OnBnClickedBoarding()
 
 void CSimDlg::OnBnClickedDis()
 {
+	dContext->makeCurrent();
+
 	OnBnClickedStop();
 
 	disButton->EnableWindow(FALSE);
@@ -210,6 +214,8 @@ void CSimDlg::OnBnClickedDis()
 
 void CSimDlg::OnBnClickedBd()
 {
+	dContext->makeCurrent();
+
 	dbButton->EnableWindow(FALSE);
 
 	disButton->EnableWindow(TRUE);
@@ -310,7 +316,6 @@ void CSimDlg::OnBnClickedStop()
 {
 	context->stop();
 	dContext->stopRedrawingThread();
-	dContext->makeCurrent();
 
 	stopButton->EnableWindow(FALSE);
 	startButton->EnableWindow(TRUE);

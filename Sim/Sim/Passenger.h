@@ -46,7 +46,7 @@ class Passenger: public Agent, public KR_Object, public GL_DiskObj
 	std::vector<Agent*> neighborsAgents;
 	std::vector<ObstacleVertex*> neighborsObstVerts;
 	std::vector<Line> orcaLines;
-
+	
 	float timeCollisionAgent;
 	float timeCollisionObst;
 	
@@ -74,7 +74,7 @@ public:
 
 	Passenger(WagonEnviroment* _env, float _neighborDist, 
 		float _timeCollisionAgent, float _timeCollisionObst, float _radius,
-		float _maxSpeed, float _personalSpace, float _allowableDistSqToSubGoal, 
+		float _maxSpeed, float _allowableDistSqToSubGoal, 
 		float _allowableDistSqToGoal, float _timeStep, const Vector2D &_velocity);
 
 	void start() { if (!isStart) { isStart = true; sendEvent(MOVE, getId(), timeStepInMS);} }

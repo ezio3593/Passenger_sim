@@ -11,7 +11,6 @@ void Passenger::wakeup()
 	timeCollisionAgent = 15;
 	timeCollisionObst = 15;
 	radius = 7;
-	personalSpace = 2;
 	maxSpeed = 3;
 	isAchievedGoal = true;
 
@@ -26,7 +25,7 @@ void Passenger::wakeup()
 
 Passenger::Passenger(WagonEnviroment* _env, float _neighborDist, float _timeCollisionAgent, 
 		float _timeCollisionObst, float _radius,
-		float _maxSpeed, float _personalSpace, float _allowableDistSqToSubGoal, 
+		float _maxSpeed, float _allowableDistSqToSubGoal, 
 		float _allowableDistSqToGoal, float _timeStep = 0.20f, const Vector2D &_velocity = Vector2D()):
 isStart(false), isInit(false)
 {
@@ -35,7 +34,6 @@ isStart(false), isInit(false)
 	timeCollisionObst = _timeCollisionObst;
 	radius = _radius;
 	maxSpeed = _maxSpeed;
-	personalSpace = _personalSpace;
 	isAchievedGoal = true;
 
 	timeStep = _timeStep;
@@ -70,7 +68,6 @@ void Passenger::recieveEvent(const Event& e)
 		if (!isAchievedGoal)
 		{
 			setPrefVelocity();
-			//velocity = prefVelocity;
 			computeNeighbors();
 			updateVelocity();
 			updatePosition();
@@ -222,7 +219,7 @@ bool Passenger::checkIsAchievedGoal(bool isSubGoal)
 void Passenger::updateVelocity()
 {
 	orcaLines.clear();
-
+	
 	const float invTimeCollisionObst = 1.0f / timeCollisionObst;
 
 	// Create obstacle ORCA lines
@@ -631,6 +628,8 @@ bool linearProgram1(const std::vector<Line> &lines, size_t lineNo, float radius,
 			
 			result = lines[lineNo].getPoint() + crossPointLeft * lines[lineNo].getDir();
 		}
+
+		if (absSq(result) > (radius * radius)) result = normalize(result) * radius;
 	}
 	else 
 	{
