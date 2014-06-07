@@ -96,7 +96,7 @@ bool WagonEnviroment::addSeats(const std::vector<Vector2D> &seat, int numOnSide,
 
 		delta += vectIntX;
 
-		if (i == numOnSide - 1) addObstacte(door);
+		if (i != numOnSide - 1) addObstacte(door);
 
 		if (!addObstacte(verts1) || !addObstacte(verts2)) return false;
 	}
@@ -155,7 +155,7 @@ bool WagonEnviroment::addSeats(const std::vector<Vector2D> &seat, int numOnSide,
 	int numSeatParts = int(length / (2*passRadius));
 	float partSeatSize = length / numSeatParts;
 
-	int splitX = length / 2.0 + intervalX;
+	int splitX = length / 2.0f + intervalX;
 	int indexInLevel2 = 0;
 
 	float startX = minX + partSeatSize / 2.0f;

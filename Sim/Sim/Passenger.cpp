@@ -17,7 +17,7 @@ void Passenger::wakeup()
 	timeStep = 0.15f;
 	timeStepInMS = timeStep * 100;
 
-	allowableDistSqToSubGoal = sqr(1.5 * radius);
+	allowableDistSqToSubGoal = sqr(2.5f * radius);
 	allowableDistSqToGoal = sqr(radius);
 
 	currentGoal = NULL;
@@ -62,11 +62,11 @@ void Passenger::recieveEvent(const Event& e)
 			setPrefVelocity();
 			velocity = prefVelocity;
 		}
-		
-		toNextGoal(isBoarding);
 
 		if (!isAchievedGoal)
 		{
+			toNextGoal(isBoarding);
+
 			setPrefVelocity();
 			computeNeighbors();
 			updateVelocity();
@@ -114,7 +114,8 @@ void Passenger::toNextGoal(bool isBoard)
 
 			if (!isSubGoal) 
 			{
-				isAchievedGoal = true;
+				//isAchievedGoal = true;
+				setGoal(new Goal(Vector2D(currentGoal->getPoint() + Vector2D(0,200))), false);
 			} else 
 			{
 				setGoal(currentGoal->getPrevLevelGoal(), isSubGoal);

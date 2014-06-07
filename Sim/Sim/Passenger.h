@@ -112,7 +112,7 @@ public:
 	float getY() const { return position.getY(); }
 	float getR() const { return radius; }
 	GL_Color getColor() const { 
-		return isAchievedGoal ? GL_Color::green : GL_Color::black; }
+		return isAchievedGoal ? GL_Color::green : !isBoarding ? GL_Color::red : GL_Color::black; }
 
 	~Passenger() {}
 };

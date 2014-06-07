@@ -32,7 +32,6 @@ CSimDlg::CSimDlg(CWnd* pParent /*=NULL*/)
 	vect.push_back(Vector2D(150,250));
 
 	env->addSeats(vect, 4, 170, 70, 7);
-	env->buildKdObstTree();
 	dContext->addWagonEnv(env);
 	env->buildKdObstTree();
 }
@@ -144,7 +143,7 @@ void CSimDlg::OnBnClickedBoarding()
 
 	passengers.erase(passengers.begin(), passengers.end());
 
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 30; ++i)
 	{
 		Passenger* agent = new Passenger(env);
 		
@@ -152,13 +151,15 @@ void CSimDlg::OnBnClickedBoarding()
 		dContext->addObject(agent);
 		env->addAgent(agent);
 
-		agent->setPosition(Vector2D(150 + 20 * i ,300));
+		agent->setPosition(Vector2D(50 + 40 * i ,300));
 		agent->setContext(context);
 		
 		agent->setIsBoarding(true);
 
 		passengers.push_back(agent);
 	}	
+	
+	std::vector<Vector2D> obstacle1, obstacle2, obstacle3, obstacle4;
 
 	dContext->redrawScene();
 }
@@ -263,7 +264,7 @@ void CSimDlg::OnBnClickedBd()
 		dContext->addObject(agent);
 		env->addAgent(agent);
 
-		agent->setPosition(Vector2D(150 + 20 * i ,300));
+		agent->setPosition(Vector2D(50 + 40 * i ,300));
 		agent->setContext(context);
 		
 		agent->setIsBoarding(true);

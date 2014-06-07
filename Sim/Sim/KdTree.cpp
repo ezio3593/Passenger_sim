@@ -156,18 +156,31 @@ void KdObstacleTree::computeObstacleNeighborsRecursive(const Agent *agent, float
 	{
 		ObstacleVertex* vert1 = node->getObstacleVertex();
 		ObstacleVertex* vert2 = vert1->getNextObstVertex();
+		
+		float x = vert1->getPoint().getX();
+		if (abs(vert1->getPoint().getX() - 600) < 5)
+		{
+			int a = 5;
+		}
 
 		float signAgentDistToLine = 0;
 		bool isAgentLeftOfEdge = isLeftOf(vert1->getPoint(), vert2->getPoint(), agent->getPosition(), signAgentDistToLine);
 
 		computeObstacleNeighborsRecursive(agent, maxDistSq, (isAgentLeftOfEdge ? node->getLeftNode() : node->getRightNode()), neighborsObstVerts);
 
-		const float distSqLine = std::min(absSq(agent->getPosition() - vert1->getPoint()),
-			absSq(agent->getPosition() - vert2->getPoint()));
+		float distSqLine = 0;
+		
+		distSqLine = sqr(isAgentLeftOfEdge) / absSq(vert1->getDir());
+		
+		if (!isPointProjInSegment(vert1->getPoint(), vert2->getPoint(), vert1->getDir(), agent->getPosition(), distSqLine))
+		{
+			distSqLine = std::min(absSq(agent->getPosition() - vert1->getPoint()),
+				absSq(agent->getPosition() - vert2->getPoint()));
+		}
 
 		if (distSqLine < maxDistSq) 
 		{
-			if (!isAgentLeftOfEdge) 
+			if (!isAgentLeftOfEdge && isLeftOf(vert1->getDir(), agent->getVelocity()))
 			{
 				// Add obstacle only if agent is on right side
 				neighborsObstVerts.push_back(node->getObstacleVertex());

@@ -130,6 +130,22 @@ inline bool getPointOfLineIntersection2(const Line& line1, const Line& line2, Ve
 	return true;
 }
 
+inline bool isPointProjInSegment(const Vector2D& p1, const Vector2D& p2, const Vector2D& normDirFrom1to2, const Vector2D& p3, float& distSq)
+{
+	Vector2D from1to3 = p3-p1;
+	Vector2D projVec = (normDirFrom1to2 * from1to3) * normDirFrom1to2;
+	Vector2D projPoint = p1 + projVec;
+	distSq = absSq(projVec - from1to3);
+
+	if ( (projPoint.getX() >= p1.getX() || projPoint.getY() >= p1.getY()) && (projPoint.getX() <= p2.getX() || projPoint.getY() <= p2.getY()) )
+	{
+		return true;
+	} else
+	{
+		return false;
+	}
+}
+
 inline Vector2D getNormal(const Vector2D &v)
 {
 	return normalize(Vector2D(-v.getY(), v.getX()));
