@@ -156,12 +156,6 @@ void KdObstacleTree::computeObstacleNeighborsRecursive(const Agent *agent, float
 	{
 		ObstacleVertex* vert1 = node->getObstacleVertex();
 		ObstacleVertex* vert2 = vert1->getNextObstVertex();
-		
-		float x = vert1->getPoint().getX();
-		if (abs(vert1->getPoint().getX() - 600) < 5)
-		{
-			int a = 5;
-		}
 
 		float signAgentDistToLine = 0;
 		bool isAgentLeftOfEdge = isLeftOf(vert1->getPoint(), vert2->getPoint(), agent->getPosition(), signAgentDistToLine);
