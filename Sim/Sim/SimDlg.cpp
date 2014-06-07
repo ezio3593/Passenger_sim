@@ -158,8 +158,6 @@ void CSimDlg::OnBnClickedBoarding()
 
 		passengers.push_back(agent);
 	}	
-	
-	std::vector<Vector2D> obstacle1, obstacle2, obstacle3, obstacle4;
 
 	dContext->redrawScene();
 }
