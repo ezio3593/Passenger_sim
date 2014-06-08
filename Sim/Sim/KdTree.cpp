@@ -172,9 +172,9 @@ void KdObstacleTree::computeObstacleNeighborsRecursive(const Agent *agent, float
 				absSq(agent->getPosition() - vert2->getPoint()));
 		}
 
-		if (distSqLine < maxDistSq) 
+		if ((distSqLine < maxDistSq) && isLeftOf(vert1->getDir(), agent->getVelocity()))
 		{
-			if (!isAgentLeftOfEdge && isLeftOf(vert1->getDir(), agent->getVelocity()))
+			if (!isAgentLeftOfEdge)
 			{
 				// Add obstacle only if agent is on right side
 				neighborsObstVerts.push_back(node->getObstacleVertex());
